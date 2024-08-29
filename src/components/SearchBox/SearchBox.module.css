@@ -1,0 +1,23 @@
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  max-width: 558.4px;
+  min-width: 300px;
+  overflow: hidden;
+}
+
+.label {
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
