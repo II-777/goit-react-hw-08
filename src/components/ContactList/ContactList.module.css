@@ -1,12 +1,49 @@
-.list {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.tableWrapper {
+  overflow-x: auto;
 }
 
-.item {
-  max-width: 600px;
-  list-style: none;
+.table {
+  width: 100%;
+  border-collapse: collapse;
 }
+
+.table td {
+  border: none;
+  padding: 10px; 
+  text-align: left;
+  vertical-align: middle; 
+}
+
+.table tr:nth-child(even) {
+  background-color: #f9f9f9; 
+}
+
+.table tr:nth-child(odd) {
+  background-color: #ffffff; 
+}
+
+.deleteBtnWrapper {
+  display: flex; 
+  justify-content: flex-end; 
+  cursor: pointer;
+  background: none; 
+  border: none; 
+  padding: 0; 
+}
+
+.deleteBtn {
+  color: lightgray; 
+}
+
+.deleteBtn:hover {
+  color: #e53935; 
+}
+
+.deleteBtn:active {
+  color: red; 
+}
+
+.deleteBtn svg {
+  vertical-align: middle; 
+}
+

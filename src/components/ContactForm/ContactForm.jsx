@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { addContact } from '../../redux/contactsOps';
+import { addContact } from '../../redux/contacts/operations';
 import css from './ContactForm.module.css';
 
-// Validation schema for the form
+
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
@@ -18,11 +18,11 @@ const validationSchema = Yup.object().shape({
     .matches(/^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/, "Invalid phone format"),
 });
 
-// ContactForm Component
+
 export default function ContactForm() {
   const dispatch = useDispatch();
 
-  // Handle form submission
+  
   const handleSubmit = (values, { resetForm }) => {
     dispatch(addContact({ name: values.name, number: values.number }))
       .unwrap()
@@ -30,12 +30,12 @@ export default function ContactForm() {
         resetForm();
       })
       .catch((error) => {
-        // Handle error (optional)
+        
         console.error('Failed to add contact:', error);
       });
   };
 
-  // Initial values for the form
+  
   const initialValues = {
     name: "",
     number: "",
@@ -47,40 +47,35 @@ export default function ContactForm() {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className={css.form}>
-        {/* Name Field */}
-        <label htmlFor="name">Name</label>
-        <Field
-          id="name"
-          name="name"
-          className={css.field}
-          type="text"
-          placeholder="John Doe"
-          autoComplete="name"
-        />
-        <ErrorMessage name="name" component="div" className={css.error} />
-        <div style={{ fontSize: '12px', color: 'gray', marginTop: '5px', marginBottom: '5px' }}>
-          Name may include letters, apostrophes, dashes, and spaces, and must be 3 to 50 characters long. For example: Adrian, Jacob Mercer.
-        </div>
-        
-        {/* Number Field */}
-        <label htmlFor="number">Number</label>
-        <Field
-          id="number"
-          name="number"
-          className={css.field}
-          type="text"
-          placeholder="+123-333-4444"
-          autoComplete="tel"
-        />
-        <ErrorMessage name="number" component="div" className={css.error} />
-        <div style={{ fontSize: '12px', color: 'gray', marginTop: '5px', marginBottom: '10px' }}>
-          Phone numbers may contain up to 10 digits only. For example: +123-333-1234 or 123-22-22.
-        </div>
+      {({ errors, touched }) => (
+        <Form className={css.form}>
+          <div className={css.fieldWrapper}>
+            <Field
+              id="name"
+              name="name"
+              className={`${css.field} ${touched.name && errors.name ? css.errorBorder : ''}`}
+              type="text"
+              placeholder="John Doe"
+              autoComplete="name"
+            />
+          </div>
+          
+          <div className={css.fieldWrapper}>
+            <Field
+              id="number"
+              name="number"
+              className={`${css.field} ${touched.number && errors.number ? css.errorBorder : ''}`}
+              type="text"
+              placeholder="+123-333-4444"
+              autoComplete="tel"
+            />
+          </div>
+          <ErrorMessage name="number" component="div" className={css.error} />
+          <ErrorMessage name="name" component="div" className={css.error} />
 
-        {/* Submit Button */}
-        <button className={css.btn} type="submit">Add contact</button>
-      </Form>
+          <button className={css.btn} type="submit">Add contact</button>
+        </Form>
+      )}
     </Formik>
   );
 }

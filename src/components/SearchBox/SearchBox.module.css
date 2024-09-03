@@ -2,17 +2,15 @@
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  border: 1px solid black;
-  border-radius: 10px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
   margin-bottom: 10px;
-  background-color: #f9f9f9;
-  max-width: 558.4px;
+  width: 100%;
   min-width: 300px;
   overflow: hidden;
 }
 
 .label {
-  margin-bottom: 8px;
 }
 
 .input {
