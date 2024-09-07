@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
-import { selectFilteredContacts, selectLoading } from '../../redux/contacts/slice';
+import { selectFilteredContacts, selectLoading, selectFilter } from '../../redux/contacts/selectors';
 import { RxCross1 } from "react-icons/rx";
 import css from './ContactList.module.css';
 
